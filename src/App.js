@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Counter from "./components/Counter";
+import Input from "./components/Input";
 
+// This is a functional component
 function App() {
+  // Returns JSX
+  // Describe what the UI should look like..
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>My App</h1>
+
+      {/* Self closing tag <SomeComponent /> */}
+      <Counter />
+      <Input placeHolderKeyword="Firstname" someProp="SomeValue" />
+      <Input placeHolderKeyword="Lastname" someProp="SomeValue" />
+      <Input placeHolderKeyword="Email" someProp="SomeValue" />
+      <Input placeHolderKeyword="Password" someProp="SomeValue" />
     </div>
   );
 }
