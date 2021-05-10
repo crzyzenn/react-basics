@@ -1,22 +1,39 @@
 import "./App.css";
-import Counter from "./components/Counter";
-import Input from "./components/Input";
+import LearnToday from "./components/LearnToday";
+import Exercise from "./components/Exercise";
 
 // This is a functional component
 function App() {
   // Returns JSX
   // Describe what the UI should look like..
-  return (
-    <div>
-      <h1>My App</h1>
 
-      {/* Self closing tag <SomeComponent /> */}
-      <Counter />
-      <Input placeHolderKeyword="Firstname" someProp="SomeValue" />
-      <Input placeHolderKeyword="Lastname" someProp="SomeValue" />
-      <Input placeHolderKeyword="Email" someProp="SomeValue" />
-      <Input placeHolderKeyword="Password" someProp="SomeValue" />
-    </div>
+  return (
+    <>
+      <LearnToday />
+
+      {/* Props and children */}
+      {/* <Card>
+        <h1>Title</h1>
+        <p>Description</p>
+      </Card> */}
+
+      {/* <ConditionalRendering /> */}
+
+      {/* <Button text="Button with default prop called color" />
+      <Button text="Normal button" color="red" />
+      <Button
+        text="Button with event! Click me!"
+        color="yellow"
+        onClick={() => alert("You pressed the button.")}
+      /> */}
+
+      {/* <div>
+        <h1>Lists & Keys</h1>
+        <ListsAndKeys />
+      </div> */}
+
+      <Exercise />
+    </>
   );
 }
 

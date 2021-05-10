@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 // Custom Input Component
 // Takes props
-export default function Input({ placeHolderKeyword, someProp }) {
+// Default prop -> type -> input type text by default.
+export default function Input({ placeHolderKeyword, someProp, type = "text" }) {
   const [name, setName] = useState("");
 
   // // Input event onChange handler function
@@ -23,7 +24,7 @@ export default function Input({ placeHolderKeyword, someProp }) {
       {/* Directly writing the event handler */}
       <input
         style={{ marginBottom: 20 }}
-        type="name"
+        type={type}
         placeholder={`Enter your ${placeHolderKeyword}`}
         onChange={(e) => setName(e.target.value)}
       />
