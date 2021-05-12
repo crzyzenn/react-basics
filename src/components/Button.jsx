@@ -17,7 +17,12 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      style={{ backgroundColor: color, padding: "5px 20px", borderRadius: 25 }}
+      style={{
+        backgroundColor: color,
+        padding: "10px 30px",
+        borderRadius: 5,
+        border: "1px solid gray",
+      }}
       type={type}
     >
       {text}

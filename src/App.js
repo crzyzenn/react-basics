@@ -9,25 +9,25 @@ import { useEffect, useState } from "react";
 function App() {
   // Returns JSX
   // Describe what the UI should look like..
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
-  const getPost = () => {
-    // Let's make this more cleaner and easier to understand
-    // ES6 -> async / await
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((resp) => {
-        return resp.json();
-      })
-      .then((json) => setData(json))
-      .catch((e) => console.log(e));
-  };
+  // const getPost = () => {
+  //   // Let's make this more cleaner and easier to understand
+  //   // ES6 -> async / await
+  //   fetch("https://jsonplaceholder.typicode.com/posts")
+  //     .then((resp) => {
+  //       return resp.json();
+  //     })
+  //     .then((json) => setData(json))
+  //     .catch((e) => console.log(e));
+  // };
 
-  // If 2nd param is empty, useEffect only runs for the first time / render
-  useEffect(() => {
-    getPost();
-  }, []);
+  // // If 2nd param is empty, useEffect only runs for the first time / render
+  // useEffect(() => {
+  //   getPost();
+  // }, []);
 
-  const dataJsx = data.map((d) => <li key={d.id}>{d.title}</li>);
+  // const dataJsx = data.map((d) => <li key={d.id}>{d.title}</li>);
 
   // DONT DO THIS!!!
   // This will cause an infinite loop
@@ -37,10 +37,10 @@ function App() {
   return (
     <>
       <LearnToday />
-
-      {/* <Login /> */}
+      <hr />
+      <Login />
       {/* <Register /> */}
-      <ul>{dataJsx}</ul>
+      {/* <ul>{dataJsx}</ul> */}
     </>
   );
 }

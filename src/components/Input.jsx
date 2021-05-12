@@ -23,6 +23,11 @@ export default function Input({
       </label>
 
       <input
+        style={{
+          padding: "12px 20px",
+          fontSize: "0.8rem",
+          border: "1px solid gray",
+        }}
         type={type}
         placeholder={`Enter your ${placeHolderKeyword}`}
         onChange={onChange}
