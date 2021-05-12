@@ -3,35 +3,30 @@ import React, { useState } from "react";
 // Custom Input Component
 // Takes props
 // Default prop -> type -> input type text by default.
-export default function Input({ placeHolderKeyword, someProp, type = "text" }) {
-  const [name, setName] = useState("");
-
-  // // Input event onChange handler function
-  // const handleChange = (e) => {
-  //   // let value = e.target.value;
-  //   setName(e.target.value);
-  // };
-
+export default function Input({
+  placeHolderKeyword,
+  onChange,
+  label,
+  type = "text",
+}) {
   return (
-    <div style={{ marginTop: 50 }}>
-      {/* Referencing handler to a separate function */}
-      {/* <input
-        style={{ marginBottom: 20 }}
-        type="name"
-        placeholder="Enter your name"
-        onChange={handleChange}
-      /> */}
-      {/* Directly writing the event handler */}
+    <div>
+      <label
+        style={{
+          display: "block",
+          fontSize: "0.8rem",
+          opacity: 0.7,
+          marginBottom: 5,
+        }}
+      >
+        {label}
+      </label>
+
       <input
-        style={{ marginBottom: 20 }}
         type={type}
         placeholder={`Enter your ${placeHolderKeyword}`}
-        onChange={(e) => setName(e.target.value)}
+        onChange={onChange}
       />
-      <br />
-      {placeHolderKeyword} = {name || "..."}
-      <br />
-      Our custom property = {someProp}
     </div>
   );
 }
