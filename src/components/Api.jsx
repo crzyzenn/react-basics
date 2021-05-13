@@ -10,6 +10,9 @@ import axios from "axios";
 
 export default function Api() {
   const [data, setData] = useState([]);
+
+  const [selectedData, setSelectedData] = useState(null);
+
   const fetchPosts = async () => {
     // ES6 -> async / await to fetch data from API.
     let { data } = await axios.get(
@@ -19,17 +22,20 @@ export default function Api() {
   };
 
   useEffect(() => {
-    // fetchPost();
     fetchPosts();
   }, []);
 
-  const handleListClick = ({ body, title, id, userId }) => {
-    // alert(`${id} ${title} ${userId} ${body}`);
-    console.log(id, title, userId, body);
+  const handleListClick = (data) => {
+    setSelectedData(data);
   };
 
+  // Render the data from API..
   const dataJsx = data.map((d) => (
-    <li key={d.id} onClick={() => handleListClick(d)}>
+    <li
+      style={{ cursor: "pointer" }}
+      key={d.id}
+      onClick={() => handleListClick(d)}
+    >
       {d.title}
     </li>
   ));
@@ -37,7 +43,14 @@ export default function Api() {
   return (
     <div>
       <h1>Selected Post</h1>
-      {/* Render selected post here.... */}
+      {/* Render */}
+      {selectedData && (
+        <div>
+          <h2>{selectedData.title}</h2>
+          <h3>By {selectedData.userId}</h3>
+          <p>{selectedData.body}</p>
+        </div>
+      )}
       <hr />
       <ul>{dataJsx}</ul>
     </div>
