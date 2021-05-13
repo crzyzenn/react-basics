@@ -10,14 +10,7 @@ import axios from "axios";
 
 export default function Api() {
   const [data, setData] = useState([]);
-  // const fetchPost = async () => {
-  //   // ES6 -> async / await to fetch data from API.
-  //   let fetchData = await fetch("https://jsonplaceholder.typicode.com/posts");
-  //   console.log(fetchData);
-  //   let jsonResp = await fetchData.json();
-  //   setData(jsonResp);
-  // };
-  const fetchPostWithAxios = async () => {
+  const fetchPosts = async () => {
     // ES6 -> async / await to fetch data from API.
     let { data } = await axios.get(
       "https://jsonplaceholder.typicode.com/posts"
@@ -27,15 +20,26 @@ export default function Api() {
 
   useEffect(() => {
     // fetchPost();
-    fetchPostWithAxios();
+    fetchPosts();
   }, []);
 
-  // DONT DO THIS!!!
-  // This will cause an infinite loop
-  // Because react re-renders the component on state change.
-  // getPost();
+  const handleListClick = ({ body, title, id, userId }) => {
+    // alert(`${id} ${title} ${userId} ${body}`);
+    console.log(id, title, userId, body);
+  };
 
-  const dataJsx = data.map((d) => <li key={d.id}>{d.title}</li>);
+  const dataJsx = data.map((d) => (
+    <li key={d.id} onClick={() => handleListClick(d)}>
+      {d.title}
+    </li>
+  ));
 
-  return <ul>{dataJsx}</ul>;
+  return (
+    <div>
+      <h1>Selected Post</h1>
+      {/* Render selected post here.... */}
+      <hr />
+      <ul>{dataJsx}</ul>
+    </div>
+  );
 }
