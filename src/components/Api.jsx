@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Route, Switch, useParams, useRouteMatch } from "react-router";
+import { Link } from "react-router-dom";
 
 // Exercise:
 // When I click on the title of a post, it should alert me with the post's
@@ -10,6 +12,7 @@ import axios from "axios";
 
 export default function Api() {
   const [data, setData] = useState([]);
+  const match = useRouteMatch();
 
   const [selectedData, setSelectedData] = useState(null);
 
@@ -34,9 +37,9 @@ export default function Api() {
     <li
       style={{ cursor: "pointer" }}
       key={d.id}
-      onClick={() => handleListClick(d)}
+      // onClick={() => handleListClick(d)}
     >
-      {d.title}
+      <Link to={`${match.url}/${d.id}`}>{d.title}</Link>
     </li>
   ));
 
@@ -53,6 +56,17 @@ export default function Api() {
       )}
       <hr />
       <ul>{dataJsx}</ul>
+
+      <Switch>
+        <Route path={`${match.url}/:postId`}>
+          <Post />
+        </Route>
+      </Switch>
     </div>
   );
+}
+
+function Post() {
+  let { postId } = useParams();
+  return <h3>Requested Post ID: {postId}</h3>;
 }

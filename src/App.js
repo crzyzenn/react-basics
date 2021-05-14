@@ -1,51 +1,94 @@
+// Alias -> different name, aka -> also known as...
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
 import "./App.css";
+
+import Login from "./components/Login";
+import Register from "./components/Register";
 import Api from "./components/Api";
-import FacebookComment from "./components/FacebookComment";
-import LearnToday from "./components/LearnToday";
+import { useEffect } from "react";
 
-// This is a functional component
 function App() {
-  // Returns JSX
-  // Describe what the UI should look like..
+  const fn = (link) => {
+    switch (link) {
+      case "/login":
+        return "Login link";
+      case "/register":
+        return "Register link";
+      case "/faq":
+        return "Faq link";
+      default:
+        return "/";
+    }
+    // if(link === '/login') {
+    //   return 'Login Link'
+    // } else if(link === '/register') {
+    //   return 'Register Link'
+    // }
+  };
 
-  const comments = [
-    {
-      id: 1,
-      image:
-        "https://images.unsplash.com/photo-1542103749-8ef59b94f47e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80",
-      name: "Jason",
-      company: "abcd",
-      comment: "Hello World",
-      commentTime: "2 seconds ago",
-    },
-    {
-      id: 2,
-      image:
-        "https://st.depositphotos.com/1269204/1219/i/600/depositphotos_12196477-stock-photo-smiling-men-isolated-on-the.jpg",
-      name: "Jason Clark",
-      company: "decasdf",
-      comment: "I have something insightful to say, as usual.",
-      commentTime: "2 seconds ago",
-    },
-  ];
+  // console.log(fn("/faq"));
 
   return (
-    <>
-      <LearnToday />
-      <hr />
-      {/* <Api /> */}
-      {comments.map(({ id, name, image, company, comment, commentTime }) => (
-        <FacebookComment
-          key={id}
-          image={image}
-          name={name}
-          company={company}
-          comment={comment}
-          commentTime={commentTime}
-        />
-      ))}
-    </>
+    <Router>
+      <header>
+        <nav>
+          {/* <a href="/">Home</a> */}
+          <Link to="/">Home</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+          <Link to="/posts">Posts</Link>
+        </nav>
+      </header>
+
+      {/* Define Routes... */}
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        {/* Nested Route */}
+        <Route path="/posts">
+          <Api />
+        </Route>
+        <Route path="/">
+          <Api />
+        </Route>
+      </Switch>
+    </Router>
   );
+}
+
+// function Topics() {
+//   let match = useRouteMatch();
+//   console.log(match);
+
+//   return (
+//     <div>
+//       <header>
+//         <Link to={`${match.url}/props-v-state`}>Go inside topics page.</Link>
+//       </header>
+
+//       <Switch>
+//         <Route path={`${match.url}/:topicId`}>
+//           <Topic />
+//         </Route>
+//       </Switch>
+//     </div>
+//   );
+// }
+
+function Post() {
+  let { topicId } = useParams();
+  return <h3>Requested topic ID: {topicId}</h3>;
 }
 
 export default App;
