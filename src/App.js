@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import ScrollToTop from "./components/ScrollToTop";
 // import Header from "./components/Header";
 
 // Exercise:
@@ -23,6 +24,7 @@ import Register from "./components/Register";
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Header />
 
       {/* Define Routes... */}
@@ -41,7 +43,7 @@ function App() {
           <Route exact path="/posts">
             <Api />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             {
               <div>
                 <h1>Home Page</h1>
@@ -49,6 +51,8 @@ function App() {
               </div>
             }
           </Route>
+          {/* Fallback route 404 */}
+          <Route>{<h1>404</h1>}</Route>
         </Switch>
       </Content>
       <Footer />
