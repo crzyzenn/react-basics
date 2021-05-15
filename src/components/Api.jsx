@@ -15,22 +15,21 @@ export default function Api() {
   const match = useRouteMatch();
 
   const [selectedData, setSelectedData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchPosts = async () => {
+    setLoading(true);
     // ES6 -> async / await to fetch data from API.
     let { data } = await axios.get(
       "https://jsonplaceholder.typicode.com/posts"
     );
     setData(data);
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchPosts();
   }, []);
-
-  const handleListClick = (data) => {
-    setSelectedData(data);
-  };
 
   // Render the data from API..
   const dataJsx = data.map((d) => (
@@ -46,6 +45,7 @@ export default function Api() {
   return (
     <div>
       <h1>Selected Post</h1>
+      {loading && "Loading Posts... Please wait."}
       {/* Render */}
       {selectedData && (
         <div>
@@ -56,17 +56,6 @@ export default function Api() {
       )}
       <hr />
       <ul>{dataJsx}</ul>
-
-      <Switch>
-        <Route path={`${match.url}/:postId`}>
-          <Post />
-        </Route>
-      </Switch>
     </div>
   );
-}
-
-function Post() {
-  let { postId } = useParams();
-  return <h3>Requested Post ID: {postId}</h3>;
 }

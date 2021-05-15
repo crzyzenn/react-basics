@@ -1,12 +1,19 @@
 // Alias -> different name, aka -> also known as...
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useParams
+} from "react-router-dom";
 import "./App.css";
 import Api from "./components/Api";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Header from "./components/Header";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Login from "./components/Login";
+import Register from "./components/Register";
 // import Header from "./components/Header";
 
 // Exercise:
@@ -21,21 +28,66 @@ function App() {
       {/* Define Routes... */}
       <Content>
         <Switch>
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/register">
+          <Route exact path="/register">
             <Register />
           </Route>
           {/* Nested Route */}
-          <Route path="/posts">
+          <Route exact path="/posts/:id">
+            <Post />
+          </Route>
+          <Route exact path="/posts">
             <Api />
           </Route>
-          <Route path="/">{<h1>Home Page</h1>}</Route>
+          <Route path="/">
+            {
+              <div>
+                <h1>Home Page</h1>
+                <p>This is my homeeeee.....</p>
+              </div>
+            }
+          </Route>
         </Switch>
       </Content>
       <Footer />
     </Router>
   );
 }
+
+function Post() {
+  const { id } = useParams();
+
+  const [post, setPost] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  const fetchPost = async () => {
+    const { data } = await axios.get(
+      `https://jsonplaceholder.typicode.com/posts/${id}`
+    );
+    setPost(data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchPost();
+  }, []);
+
+  return (
+    <div>
+      <h1>Post {id}</h1>
+
+      {loading && "Loading Post... Please wait."}
+
+      {post && (
+        <>
+          <h2>{post.title}</h2>
+          <p>{post.body}</p>
+        </>
+      )}
+    </div>
+  );
+}
+
 export default App;

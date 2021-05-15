@@ -1,15 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import "./header.css";
 
-export default function index() {
+export default function Index() {
+  const { pathname } = useLocation();
   return (
     <header>
       <nav className="header--nav">
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-        <Link to="/posts">Posts</Link>
+        <NavLink to="/" isActive={() => pathname === "/"}>
+          Home
+        </NavLink>
+        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/register">Register</NavLink>
+        <NavLink to="/posts">Posts</NavLink>
       </nav>
     </header>
   );
