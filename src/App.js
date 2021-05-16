@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Api from "./components/Api";
+import { AuthProvider } from "./components/AuthProvider";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -23,40 +24,42 @@ import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <Header />
+    <AuthProvider>
+      <Router>
+        <ScrollToTop />
+        <Header />
 
-      {/* Define Routes... */}
-      <Content>
-        <Switch>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/register">
-            <Register />
-          </Route>
-          {/* Nested Route */}
-          <Route exact path="/posts/:id">
-            <Post />
-          </Route>
-          <Route exact path="/posts">
-            <Api />
-          </Route>
-          <Route exact path="/">
-            {
-              <div>
-                <h1>Home Page</h1>
-                <p>This is my homeeeee.....</p>
-              </div>
-            }
-          </Route>
-          {/* Fallback route 404 */}
-          <Route>{<h1>404</h1>}</Route>
-        </Switch>
-      </Content>
-      <Footer />
-    </Router>
+        {/* Define Routes... */}
+        <Content>
+          <Switch>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/register">
+              <Register />
+            </Route>
+            {/* Nested Route */}
+            <Route exact path="/posts/:id">
+              <Post />
+            </Route>
+            <Route exact path="/posts">
+              <Api />
+            </Route>
+            <Route exact path="/">
+              {
+                <div>
+                  <h1>Home Page</h1>
+                  <p>This is my homeeeee.....</p>
+                </div>
+              }
+            </Route>
+            {/* Fallback route 404 */}
+            <Route>{<h1>404</h1>}</Route>
+          </Switch>
+        </Content>
+        <Footer />
+      </Router>
+    </AuthProvider>
   );
 }
 

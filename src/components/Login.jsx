@@ -1,64 +1,46 @@
-import React, { useEffect, useState } from "react";
+import { computeHeadingLevel } from "@testing-library/react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "./AuthProvider";
 import Button from "./Button";
 import Input from "./Input";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
+  const history = useHistory();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: "", password: "" });
-  const [numbers, setNumbers] = useState({ a: 1, b: 1 });
 
-  console.log("Component rendered");
-  console.log(errors);
+  const [auth, setAuth] = useContext(AuthContext);
 
   // On Login Press
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(errors);
     // Validate user data before submission
     if (!email)
       setErrors((prevState) => {
         return { ...prevState, email: "Email field is required!" };
       });
-    console.log(errors);
     if (!password)
       setErrors((prevState) => {
         return { ...prevState, password: "Password field is required!" };
       });
-    console.log(errors);
 
     // If data is validated, send data for submission
     if (email && password) {
       console.log("Data for form submission ", { email, password });
+
+      // After login we get a user object, set that in the context
+      setAuth({
+        loggedIn: true,
+        user: {
+          name: "Zen",
+          email
+        }
+      });
     }
   };
-
-  const persistentState = () => {
-    console.log(numbers);
-    setNumbers((prevState) => ({ a: prevState.a + 1, b: prevState.b + 1 }));
-    console.log(numbers);
-    setNumbers((prevState) => ({ a: prevState.a + 1, b: prevState.b + 1 }));
-    console.log(numbers);
-    setNumbers((prevState) => ({ a: prevState.a + 1, b: prevState.b + 1 }));
-    console.log(numbers);
-    setNumbers((prevState) => ({ a: prevState.a + 1, b: prevState.b + 1 }));
-    console.log(numbers);
-  };
-  // const nonPersistentState = () => {
-  //   console.log(numbers);
-  //   setNumbers({ a: numbers.a + 1, b: numbers.b + 1 });
-  //   console.log(numbers);
-  //   setNumbers({ a: numbers.a + 1, b: numbers.b + 1 });
-  //   console.log(numbers);
-  //   setNumbers({ a: numbers.a + 1, b: numbers.b + 1 });
-  //   console.log(numbers);
-  //   setNumbers({ a: numbers.a + 1, b: numbers.b + 1 });
-  // };
-
-  // useEffect(() => {
-  //   // nonPersistentState();
-  //   persistentState();
-  // }, []);
 
   return (
     <div>
