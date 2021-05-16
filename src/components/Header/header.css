@@ -6,6 +6,10 @@
   transition: all 0.3s;
 }
 
+a.active {
+  color: skyblue;
+}
+
 a:hover {
   color: skyblue;
   transform: scale(1.2);
