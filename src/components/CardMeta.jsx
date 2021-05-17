@@ -8,7 +8,7 @@ export default function CardMeta({ title, content }) {
     <div
       style={{
         lineHeight: 0.4,
-        marginBottom: 20,
+        marginBottom: 50,
       }}
     >
       <span style={{ opacity: 0.5, fontWeight: "bold" }}>{title}</span>

@@ -14,7 +14,7 @@ const userData = {
 
 export default function Exercise() {
   return (
-    <Card>
+    <Card width="300px">
       <img
         style={{ width: "100%", height: 300, objectFit: "cover" }}
         src={userData.image}

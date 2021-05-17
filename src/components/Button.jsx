@@ -1,7 +1,12 @@
 import React from "react";
 
 // Color is a default prop
-export default function Button({ text, onClick = () => {}, color = "gray" }) {
+export default function Button({
+  text,
+  onClick = () => {},
+  color = "gray",
+  type = "",
+}) {
   // // Default params in function
   // const sum = (a, b = 2) => {
   //   return a * b;
@@ -12,7 +17,13 @@ export default function Button({ text, onClick = () => {}, color = "gray" }) {
   return (
     <button
       onClick={onClick}
-      style={{ backgroundColor: color, padding: "5px 20px", borderRadius: 25 }}
+      style={{
+        backgroundColor: color,
+        padding: "10px 30px",
+        borderRadius: 5,
+        border: "1px solid gray",
+      }}
+      type={type}
     >
       {text}
     </button>
