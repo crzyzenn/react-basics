@@ -7,16 +7,16 @@ import Register from "./components/Register";
 import Header from "./components/Header";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
+import Post from "./components/Post";
+import ScrollRestoration from "./components/ScrollRestoration";
+import UsersTable from "./components/UsersTable";
 // import Header from "./components/Header";
-
-// Exercise:
-// Create a Header component and render it
-// Bonus: Style the header -> each link must have horizontal space..
 
 function App() {
   return (
     <Router>
       <Header />
+      <ScrollRestoration />
 
       {/* Define Routes... */}
       <Content>
@@ -27,7 +27,13 @@ function App() {
           <Route path="/register">
             <Register />
           </Route>
+          <Route path="/users">
+            <UsersTable />
+          </Route>
           {/* Nested Route */}
+          <Route path="/posts/:id">
+            <Post />
+          </Route>
           <Route path="/posts">
             <Api />
           </Route>

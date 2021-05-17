@@ -10,3 +10,10 @@ a:hover {
   color: skyblue;
   transform: scale(1.2);
 }
+
+.active {
+  color: white !important;
+  background: skyblue;
+  padding: 10px;
+  border-radius: 10px;
+}

@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Route, Switch, useParams, useRouteMatch } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useRouteMatch } from "react-router";
 import { Link } from "react-router-dom";
 
 // Exercise:
-// When I click on the title of a post, it should alert me with the post's
-// user id
-// id
-// body
-// title
+// Implement loading in the API.
+// And show the user the posts are loading...
 
 export default function Api() {
   const [data, setData] = useState([]);
   const match = useRouteMatch();
 
   const [selectedData, setSelectedData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const fetchPosts = async () => {
     // ES6 -> async / await to fetch data from API.
@@ -22,15 +20,12 @@ export default function Api() {
       "https://jsonplaceholder.typicode.com/posts"
     );
     setData(data);
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchPosts();
   }, []);
-
-  const handleListClick = (data) => {
-    setSelectedData(data);
-  };
 
   // Render the data from API..
   const dataJsx = data.map((d) => (
@@ -46,6 +41,10 @@ export default function Api() {
   return (
     <div>
       <h1>Selected Post</h1>
+
+      {/* Show loading if the post is loading.. */}
+      {loading && "Loading posts...Please wait.."}
+
       {/* Render */}
       {selectedData && (
         <div>
@@ -56,17 +55,6 @@ export default function Api() {
       )}
       <hr />
       <ul>{dataJsx}</ul>
-
-      <Switch>
-        <Route path={`${match.url}/:postId`}>
-          <Post />
-        </Route>
-      </Switch>
     </div>
   );
-}
-
-function Post() {
-  let { postId } = useParams();
-  return <h3>Requested Post ID: {postId}</h3>;
 }
